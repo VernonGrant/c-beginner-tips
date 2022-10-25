@@ -1,6 +1,6 @@
 # C Beginner Tips
 
-#### The size of a char is guaranteed to be 1 byte.
+## The size of a char is guaranteed to be 1 byte.
 
 It's important to understand that the `sizeof(char)` is always going to be 1
 byte, that's guaranteed. But the number of bits in a byte can differ across
