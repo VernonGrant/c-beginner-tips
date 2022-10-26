@@ -29,7 +29,7 @@ char *allocated_string = malloc((strlen(some_string) + 1));
 Structure padding is a concept in C that adds the one or more empty bytes
 between the memory addresses to align the data in memory. A processor reads
 more than one byte at a time, we call the amount of data read by the processor
-a **word**. On a 32bit processor a word is equal to 4 bytes and on a 64 bit
+a **word**. On a 32 bit processor a word is equal to 4 bytes and on a 64 bit
 processor a word is 8 bytes.
 
 Generally speaking, structure members are aligned based on your processors word
