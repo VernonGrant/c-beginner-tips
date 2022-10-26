@@ -30,10 +30,16 @@ Structure padding is a concept in C that adds the one or more empty bytes
 between the memory addresses to align the data in memory. A processor reads
 more than one byte at a time, we call the amount of data read by the processor
 a **word**. On a 32 bit processor a word is equal to 4 bytes and on a 64 bit
-processor a word is 8 bytes.
+processor a word is 8 bytes. The definition of a word depends on the
+architecture.
 
-Generally speaking, structure members are aligned based on your processors word
-size. This results in less CPU operations at the cost of extra memory usage.
+It's important to understand that **memory is word addressable**, meaning that
+we don't access memory one byte at a time, but instead word by word. So for each
+processor cycle we can fetch one word of data from the memory.
+
+By taking this into account, we can see why the compiler chooses to add padding
+between structure members. It's main goal is to limit the number of processor
+cycles at the cost of memory usage.
 
 ```C
 #include <stdio.h>
@@ -45,7 +51,7 @@ struct example_a {
     long long int b;  // Is 8 bytes. // Will take 8 bytes.
     short int c;      // Is 2 bytes. -- Will take 8 bytes
     unsigned int d;   // Is 4 bytes. /
-                      // Total should be: 16 bytes but it's actually 24 bytes.
+                      // Total should be: 16 bytes, but it's actually 24 bytes.
 };
 
 // Same structure but improved alignment.
