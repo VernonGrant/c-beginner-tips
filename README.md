@@ -33,9 +33,10 @@ a **word**. On a 32 bit processor a word is equal to 4 bytes and on a 64 bit
 processor a word is 8 bytes. The definition of a word depends on the
 architecture.
 
-It's important to understand that **memory is word addressable**, meaning that
-we don't access memory one byte at a time, but instead word by word. So for each
-processor cycle we can fetch one word of data from the memory.
+Generally speaking, it's important to understand that **memory is word
+addressable**, meaning that we don't access memory one byte at a time, but
+instead word by word. So for each processor cycle we can fetch one word of data
+from the memory.
 
 By taking this into account, we can see why the compiler chooses to add padding
 between structure members. It's main goal is to limit the number of processor
