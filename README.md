@@ -31,11 +31,10 @@ The amount of data a CPU's internal data registers can hold and process at one
 time is referred to as the word size. Modern desktop processors are either 32
 or 64 bits, although most people are probably using an 64 bit architecture.
 
-You must be aware of how **struct (structure) padding** works in C. Stucts are
+You must be aware of how **struct alignment / padding** works in C. Stucts are
 padded based on the processor word size. As you can imagine this optimizes the
-number of operations the CPU need to do, at the cost of memory usage.
-
-Let's take a look at the following example:
+number of operations the CPU need to do at the cost of memory usage. See the
+below example.
 
 ```C
 #include <stdio.h>
@@ -53,7 +52,7 @@ struct example_a {
 // Same structure but improved alignment.
 
 struct example_b {
-    short int a;      // Is 2 bytes. --- Can be aligned in a single 8 bytes.
+    short int a;      // Is 2 bytes. --- Can be packed into a single 8 bytes.
     short int c;      // Is 2 bytes.  /
     unsigned int d;   // Is 4 bytes. /
     long long int b;  // Is 8 bytes.
