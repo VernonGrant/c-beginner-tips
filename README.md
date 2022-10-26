@@ -24,7 +24,7 @@ char *allocated_string = malloc((strlen(some_string) + 1) * sizeof(char));
 char *allocated_string = malloc((strlen(some_string) + 1));
 ```
 
-## Structures are packed based on processor word size.
+## Structures are aligned based on the processors word size.
 
 A **word** is the natural unit of data used by a particular processor design.
 The amount of data a CPU's internal data registers can hold and process at one
