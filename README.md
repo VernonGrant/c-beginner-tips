@@ -3,7 +3,7 @@
 If any of the below information is misleading, please submit a pull request or
 open an issue.
 
-## The size of a char is guaranteed to be 1 byte.
+## The size of a char is guaranteed to be 1 byte
 
 It's important to understand that the `sizeof(char)` is always going to be 1
 byte, that's guaranteed. But the number of bits in a byte is implementation
@@ -24,17 +24,16 @@ char *allocated_string = malloc((strlen(some_string) + 1) * sizeof(char));
 char *allocated_string = malloc((strlen(some_string) + 1));
 ```
 
-## Structures are packed based on the processors word size.
+## Structures padding is related to the processors word size
 
-A **word** is the natural unit of data used by a particular processor design.
-The amount of data a CPU's internal data registers can hold and process at one
-time is referred to as the word size. Modern desktop processors are either 32
-or 64 bits, although most people are probably using an 64 bit architecture.
+Structure padding is a concept in C that adds the one or more empty bytes
+between the memory addresses to align the data in memory. A processor reads
+more than one byte at a time, we call the amount of data read by the processor
+a **word**. On a 32bit processor a word is equal to 4 bytes and on a 64 bit
+processor a word is 8 bytes.
 
-You must be aware of how **struct alignment / padding** works in C. Stucts are
-padded based on the processor word size. As you can imagine this optimizes the
-number of operations the CPU need to do at the cost of memory usage. See the
-below example.
+Generally speaking, structure members are aligned based on your processors word
+size. This results in less CPU operations at the cost of extra memory usage.
 
 ```C
 #include <stdio.h>
@@ -56,6 +55,7 @@ struct example_b {
     short int c;      // Is 2 bytes.  /
     unsigned int d;   // Is 4 bytes. /
     long long int b;  // Is 8 bytes.
+                      // Total is : 16 bytes.
 };
 
 int main(int argc, char *argv[])
