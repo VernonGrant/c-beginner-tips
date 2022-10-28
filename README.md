@@ -27,7 +27,7 @@ char *allocated_string = malloc((strlen(some_string) + 1));
 **The order in which you place a structure's member's effects, it's size and
 memory layout.** The essence of why this is the case, relates to the concept of
 memory alignment and the compiler's mission to make memory access as efficient
-as possible. The way in which compiler chooses to make memory access more
+as possible. The way in which the compiler chooses to make memory access more
 efficient, greatly depends on the architecture that's being used.
 
 Let's take a look at a couple examples:
