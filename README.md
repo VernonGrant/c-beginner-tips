@@ -24,7 +24,7 @@ char *allocated_string = malloc((strlen(some_string) + 1));
 
 ## Be aware of structure padding and alignment
 
-**The order in which you place a structures members effects, it's size and
+**The order in which you place a structure's member's effects, it's size and
 memory layout.** The essence of why this is the case, relates to the concept of
 memory alignment and the compiler's mission to make memory access as efficient
 as possible. The way in which compiler chooses to make memory access more
@@ -46,7 +46,7 @@ printf("The size of structure example is: %lu bytes.\n", sizeof(struct example))
 ```
 
 Based on the output, you can see that this structure has an additional 4 bytes,
-that should unexpected if your unfamiliar with memory alignment. Now let's make
+that should be unexpected if you're unfamiliar with memory alignment. Now let's make
 a small adjustment by moving member `b` below member `c` and recheck the
 output.
 
@@ -62,11 +62,11 @@ struct example {
 printf("The size of structure example is: %lu bytes.\n", sizeof(struct example));
 ```
 
-The structures size is now 4 bytes less. As you can see, the way in which you
+The structure's size is now 4 bytes less. As you can see, the way in which you
 order a structures members can have a dramatic increase in memory usage,
 especially if your dealing with thousands of instances.
 
-**Truthfully speaking it's not all that important for you to understand exactly
+**Truthfully speaking, it's not all that important for you to understand exactly
 how the compiler is going to align your structure in memory, especially as a
 beginner. As you can always just perform manual checks to find the most optimal
 ordering for your use case.**
@@ -84,7 +84,7 @@ build an intuition for most cases.
 > types on a vanilla ISA (Instruction Set Architectures) are self-aligned.
 > Pointers, whether 32-bit (4-byte) or 64-bit (8-byte) are self-aligned too.
 
-To better understand the above statement let's look at the memory layout of the
+To better understand the above statement, let's look at the memory layout of the
 above two examples, and break down the memory alignment checks based.
 
 ```C
@@ -108,14 +108,14 @@ struct example test = {'A', 100, 'A', 100};
 
 - `test.a` is stored at address: `7156`.
 - `test.b`, (short) is stored at address: `7158`.
-    - `7157 % sizeof(short)` is non zero, a 2-byte short must start on an even address.
+    - `7157 % sizeof(short)` is non-zero, a 2-byte short must start on an even address.
 - `test.c`, (char) is stored at address: `7160`.
 - `test.d`, (int) is stored at address: `7164`
-    - `7161 % sizeof(int)` is non zero. A 4-byte int must start on an address divisible by 4.
-    - `7162 % sizeof(int)` is non zero. A 4-byte int must start on an address divisible by 4.
-    - `7163 % sizeof(int)` is non zero. A 4-byte int must start on an address divisible by 4.
+    - `7161 % sizeof(int)` is non-zero. A 4-byte int must start on an address divisible by 4.
+    - `7162 % sizeof(int)` is non-zero. A 4-byte int must start on an address divisible by 4.
+    - `7163 % sizeof(int)` is non-zero. A 4-byte int must start on an address divisible by 4.
 
-So basically the 4-bytes that where skipped in favour of memory alignment is referred to as padding.
+So basically the 4-bytes that were skipped in favor of memory alignment is referred to as padding.
 
 ```C
 // 8 byte struct layout.
@@ -139,7 +139,7 @@ struct example test = {'A', 'A', 100, 100};
 - `test.c`, (char) is stored at address: `7157`.
 - `test.b`, (short) is stored at address: `7158`.
 - `test.d`, (int) is stored at address: `7160`
-    - `7159 % sizeof(int)` is non zero. A 4-byte int must start on an address divisible by 4.
+    - `7159 % sizeof(int)` is non-zero. A 4-byte int must start on an address divisible by 4.
 
 The above concept can also be put this way:
 
