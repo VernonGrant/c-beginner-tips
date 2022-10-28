@@ -63,7 +63,7 @@ printf("The size of structure example is: %lu bytes.\n", sizeof(struct example))
 ```
 
 The structure's size is now 4 bytes less. As you can see, the way in which you
-order a structures members can have a dramatic increase in memory usage,
+order a structures members can have a dramatic effect on memory usage,
 especially if your dealing with thousands of instances.
 
 **Truthfully speaking, it's not all that important for you to understand exactly
@@ -85,7 +85,7 @@ build an intuition for most cases.
 > Pointers, whether 32-bit (4-byte) or 64-bit (8-byte) are self-aligned too.
 
 To better understand the above statement, let's look at the memory layout of the
-above two examples, and break down the memory alignment checks based.
+above two examples, and break down the memory alignment checks.
 
 ```C
 // 12 byte struct layout.
