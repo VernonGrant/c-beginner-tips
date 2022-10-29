@@ -45,8 +45,8 @@ struct example {
 printf("The size of structure example is: %lu bytes.\n", sizeof(struct example));
 ```
 
-Based on the output, you can see that this structure has an additional 4 bytes,
-that should be unexpected if you're unfamiliar with memory alignment. Now let's make
+Based on the output, you can see that this structure has an additional 4 bytes.
+That should be unexpected, if you're unfamiliar with memory alignment. Now let's make
 a small adjustment by moving member `b` below member `c` and recheck the
 output.
 
@@ -66,10 +66,12 @@ The structure's size is now 4 bytes less. As you can see, the way in which you
 order a structures members can have a dramatic effect on memory usage,
 especially if your dealing with thousands of instances.
 
-**Truthfully speaking, it's not all that important for you to understand exactly
-how the compiler is going to align your structure in memory, especially as a
-beginner. As you can always just perform manual checks to find the most optimal
-ordering for your use case.**
+**Truthfully speaking, it's not all that important for you to understand
+exactly how the compiler is going to align your structure in memory, especially
+as a beginner. As you can always just perform manual checks to find the most
+optimal ordering for your use case. Also, the alignment of a structure's
+member's depends heavily on the platform. So manually optimizing a structure,
+won't generalize to all platforms.**
 
 Knowing exactly how the compiler chooses to align a structure members can be
 difficult to determine without a deep understanding of the architecture your
@@ -141,9 +143,18 @@ struct example test = {'A', 'A', 100, 100};
 - `test.d`, (int) is stored at address: `7160`
     - `7159 % sizeof(int)` is non-zero. A 4-byte int must start on an address divisible by 4.
 
-The above concept can also be put this way:
+The theory of memory alignment in most ISA can also be put this way:
 
 > Unaligned memory accesses occur when you try to read N bytes of data starting
 > from an address that is not evenly divisible by N (i.e. addr % N != 0). For
 > example, reading 4 bytes of data from address 0x10004 is fine, but reading 4
 > bytes of data from address 0x10005 would be an unaligned memory access.
+
+Before closing this topic, it's also interesting to think of an array of
+structures. In C, array's items are placed side by side, allowing us to access
+items by size offsets, as an array can only contain items of the same
+type.
+
+Looking at the previous memory layouts, it's clear that both our structures can
+be placed side by side and all their individual members will still be aligned
+correctly.
